@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: netflix-app
-        image: skimg/netflix:latest
+        image: skimg/netflix
         ports:
         - containerPort: 80
