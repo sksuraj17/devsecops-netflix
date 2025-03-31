@@ -49,50 +49,30 @@ pipeline{
                 sh "trivy fs . > trivyfs.txt"
             }
         }
-        stage("Docker Build & Push"){
-            steps{
-                script{
-                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
-                       sh "docker build --build-arg TMDB_V3_API_KEY=<yourtmdbapikey> -t netflix ."
-                       sh "docker tag netflix skimg/netflix:latest "
-                       sh "docker push skimg/netflix:latest "
+        stage("Docker Build & Push") {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'tmdb-key', variable: 'TMDB_V3_API_KEY')]) {
+                        withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
+                            sh """
+                                docker build --build-arg TMDB_V3_API_KEY=\$TMDB_V3_API_KEY -t netflix .
+                                docker tag netflix skimg/netflix:latest
+                                docker push skimg/netflix:latest
+                            """
+                        }
                     }
                 }
             }
         }
-        stage("TRIVY"){
+        stage("GRYPE"){
             steps{
-                sh "trivy image skimg/netflix:latest > trivyimage.txt" 
+                sh "grype skimg/netflix:latest > grypescan.txt" 
             }
         }
         stage('Deploy to container'){
             steps{
                 sh 'docker run -d -p 8081:80 skimg/netflix:latest'
             }
-        }
-        stage('Deploy to kubernetes'){
-            steps{
-                script{
-                    dir('Kubernetes') {
-                        withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-                                sh 'kubectl apply -f deployment.yml'
-                                sh 'kubectl apply -f service.yml'
-                        }   
-                    }
-                }
-            }
-        }
-
-    }
-    post {
-     always {
-        emailext attachLog: true,
-            subject: "'${currentBuild.result}'",
-            body: "Project: ${env.JOB_NAME}<br/>" +
-                "Build Number: ${env.BUILD_NUMBER}<br/>" +
-                "URL: ${env.BUILD_URL}<br/>",
-            to: 'iambatmanthegoat@gmail.com',                                #change mail here
-            attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
         }
     }
 }
