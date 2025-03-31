@@ -1,12 +1,14 @@
 # devsecops-netflix
 
-![image](https://github.com/user-attachments/assets/f1994e7d-d9ee-4f6a-9355-2066a4e56e8d)
+![Screenshot 2025-03-31 191719](https://github.com/user-attachments/assets/62899c57-3747-4631-af1f-e12691b810f1)
 
-![image](https://github.com/user-attachments/assets/268aea89-b4b9-42b0-a008-7e02e6c69666)
+![Screenshot 2025-03-31 175831](https://github.com/user-attachments/assets/014080da-93ca-4b48-b5e9-10944fa6c5ce)
 
-![image](https://github.com/user-attachments/assets/e44b2b65-dcf7-41e8-af66-b2f7fb09cb79)
+![Screenshot 2025-03-31 180306](https://github.com/user-attachments/assets/b70eeb0e-80ab-4dd6-a1cc-e8ed2fdedb17)
 
-![image](https://github.com/user-attachments/assets/eff32ea0-4dd8-4864-998c-6f63840c978a)
+![Screenshot 2025-03-31 175441](https://github.com/user-attachments/assets/ffb08677-5b8e-41b2-8473-b2946514a4c9)
+
+![Screenshot 2025-03-31 204617](https://github.com/user-attachments/assets/15cb9138-e9ae-4e04-b98a-f9765052a34a)
 
 
 
